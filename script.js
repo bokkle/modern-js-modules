@@ -3,7 +3,7 @@
 // import { addToCart, totalPrice as price, qt } from './shoppingCart.js';
 
 console.log('importing module');
-
+/*
 // addToCart('bread', 5);
 // console.log(price, qt);
 
@@ -38,7 +38,7 @@ console.log(data);
 //below will not execute until above does bc blocked by await
 console.log('Something');
 */
-
+/*
 const getLastPost = async () => {
   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
   const data = await res.json();
@@ -55,5 +55,55 @@ lastPost.then((last) => console.log(last));
 //instead, use top level await
 const lastPost2 = await getLastPost();
 console.log(lastPost2);
+*/
+/*
+// ify
+const ShoppingCart2 = (() => {
+  const cart = [];
+  const shippingCost = 10;
+  const totalPrice = 237;
+  const totalQuantity = 23;
 
+  const addToCart = (product, quantity) => {
+    cart.push({ product, quantity });
+    console.log(
+      `${quantity} ${product} added to cart (shipping cost is ${shippingCost})`
+    );
+  };
 
+  const orderStock = (product, quantity) => {
+    console.log(`${quantity} ${product} ordered from supplier`);
+  };
+
+  return {
+    addToCart,
+    cart,
+    totalPrice,
+    totalQuantity,
+  };
+})();
+
+ShoppingCart2.addToCart('apple', 4);
+ShoppingCart2.addToCart('pizza', 2);
+console.log(ShoppingCart2);
+console.log(ShoppingCart2.shippingCost); // undefined, not accessible bc module
+*/
+
+// NPM
+import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+
+const state = {
+  cart: [
+    { product: 'bread', quantity: 5 },
+    { product: 'pizza', quantity: 5 },
+  ],
+  user: { loggedIn: true },
+};
+const stateClone = Object.assign({}, state);
+// instead of object.assign, can use lodash
+const stateDeepClone = cloneDeep(state);
+//below changes the original object AND clone
+state.user.loggedIn = false;
+console.log(stateClone);
+
+console.log(stateDeepClone);
