@@ -3,7 +3,7 @@
 // import { addToCart, totalPrice as price, qt } from './shoppingCart.js';
 
 console.log('importing module');
-/*
+
 // addToCart('bread', 5);
 // console.log(price, qt);
 
@@ -15,18 +15,18 @@ console.log('importing module');
 // import add, { addToCart, totalPrice as price, qt } from './shoppingCart.js';
 // add('pizza', 2);
 
-import add, { cart, totalPrice } from './shoppingCart.js';
-add('pizza', 2);
-add('bread', 5);
-add('apples', 4);
+// import add, { cart, totalPrice } from './shoppingCart.js';
+// add('pizza', 2);
+// add('bread', 5);
+// add('apples', 4);
 
 //IMPORTS ARE NOT COPIES OF THE EXPORT, INSTEAD, THEY ARE A LIVE CONNECTION
 // aka they point to the same place in memory
-console.log(cart);
+// console.log(cart);
 
-import { tax } from './shoppingCart.js';
-console.log(tax);
-console.log(totalPrice * tax);
+// import { tax } from './shoppingCart.js';
+// console.log(tax);
+// console.log(totalPrice * tax);
 /*
 // ES2022 AWAIT/MODULES
 // can use await outside of an async function, ONLY WORKS IN MODULES
@@ -90,7 +90,7 @@ console.log(ShoppingCart2.shippingCost); // undefined, not accessible bc module
 */
 
 // NPM
-import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+import cloneDeep from 'lodash-es';
 
 const state = {
   cart: [
@@ -107,3 +107,25 @@ state.user.loggedIn = false;
 console.log(stateClone);
 
 console.log(stateDeepClone);
+
+if (module.hot) {
+  module.hot.accept();
+}
+
+class Person {
+  greeting = 'Hey';
+  constructor(name) {
+    this.name = name;
+    console.log(`${this.greeting}, ${this.name}`);
+  }
+}
+const mitch = new Person('Mitch');
+console.log('Mitch' ?? null);
+
+console.log(cart.find((el) => el.quantity >= 2));
+
+import 'core-js/stable';
+// import 'core-js/stable/array/find';
+
+// polyfilling asynnc funcs
+import 'regenerator-runtime/runtime';
